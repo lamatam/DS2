@@ -9,22 +9,22 @@ package com.myproject.ds_project;
  * @author loolo
  */
 public class StudentList implements IStudentList {
-     public LinkedList <IStudent> students = new LinkedList <IStudent> ();
+    public LinkedList <IStudent> students = new LinkedList <IStudent> ();
 
     @Override
     public boolean add(IStudent student)
     {
     if ( students.empty()) //if empty 
         {
-            students.insert(new Student (student)); //send object 
-            return true;
+            students.insert(new Student (student)); //add and send object 
+            return true; //success
         }//end if 
     
     students.findFirst(); //otherwise
     if (student.compareTo(students.retrieve()) < 0) //comparing ID
     {
         students.insertAtBegin(student);
-            return true;
+            return true; //success
     }//end if
     
     while ( ! students.last() && (student.compareTo(students.retrieve()) >= 0))
@@ -32,25 +32,24 @@ public class StudentList implements IStudentList {
 
     if (student.getStudentId() == students.retrieve().getStudentId())
        return false; //becouse it exist
-    int comp = student.compareTo(students.retrieve()); //comparing ID
-    if (comp > 0 )
-       students.insert(student);
+    int comp = student.compareTo(students.retrieve()); //comparing ID 0 if it equal, -1 if left small than right, 1 otherwise
+    if (comp > 0 ) 
+       students.insert(student); //insert after current
      else 
-       students.insertBefore(student);
+       students.insertBefore(student); //insert before current
     return true;
     }
 
     @Override
-    public IStudent findById(int studentId) {
+    public IStudent findById(int studentId) { //return null if the student not found
     IStudent student = null;
         
-        boolean Found = false;
-        if ( ! students.empty())
-        {
+    boolean Found = false;
+    if ( ! students.empty()) {
             students.findFirst();
         
-            while ( ! students.last() && ! Found)
-            {    if ( studentId == students.retrieve().getStudentId())
+        while ( ! students.last() && ! Found) {
+            if ( studentId == students.retrieve().getStudentId())
                 {
                     Found = true;
                     student = students.retrieve();
@@ -58,7 +57,7 @@ public class StudentList implements IStudentList {
                  else   
                     students.findNext();
             }
-            if ( ! Found && (studentId == students.retrieve().getStudentId()))
+            if ( ! Found && (studentId == students.retrieve().getStudentId())) //comparing last id
             {
                 Found = true;
                 student = students.retrieve();
@@ -102,7 +101,7 @@ public class StudentList implements IStudentList {
         return data;    }
 
     @Override
-    public IStudent findByEmail(String email) {
+    public IStudent findByEmail(String email) { //
     IStudent student = null;
         
         boolean Found = false;
@@ -120,7 +119,7 @@ public class StudentList implements IStudentList {
                     students.findNext();
             }
         }
-        if ( email.compareToIgnoreCase(students.retrieve().getEmail()) == 0)
+        if ( ! Found && email.compareToIgnoreCase(students.retrieve().getEmail()) == 0)
         {
             Found = true;
             student = students.retrieve();
@@ -190,7 +189,7 @@ public class StudentList implements IStudentList {
                 Delete = true;
                 students.remove();
             }
-        }
+        }//end iff
         return Delete;
     }
 
