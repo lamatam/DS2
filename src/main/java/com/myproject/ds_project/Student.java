@@ -136,13 +136,10 @@ public String toString(){
         str+= "Year Level:" + this.yearLevel + "\n";
         str+= "Notes: " + this.notes + "\n";
         
-        str += "Student events Schedules : " + "\n";
-        
-        if (sEvents.empty())
-            str += "No Scheduled Events. " + "\n";
-        else
+        str += "Student events Schedules : " + "\n";  
+        if (!sEvents.empty()) //print events
         {
-                sEvents.findFirst();
+             sEvents.findFirst();
                 while ( ! sEvents.last())
                 {
                     str+= sEvents.retrieve().getTitle() + "  (" + sEvents.retrieve().getEventId() + ")  \n";
@@ -150,6 +147,10 @@ public String toString(){
                 }
                 str+= sEvents.retrieve().getTitle() + "  (" + sEvents.retrieve().getEventId() + ")  \n";
         }
+            
+        else //if there is no events Scheduled
+        str += "No Scheduled Events. " + "\n";
+        
         return str;       
     }
     @Override
