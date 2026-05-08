@@ -11,7 +11,7 @@ package com.myproject.ds_project;
 public class Meeting implements IMeeting{
         public IStudent student;
         final int EventId;
-        String title;
+        String Title;
         IDateTime startDateTime;
         IDateTime endDateTime;
         String location;
@@ -26,7 +26,7 @@ public class Meeting implements IMeeting{
     public Meeting(int eID, String t, IDateTime sDT , IDateTime eDT, String loc )
         {
             EventId = eID;
-            title = t;
+            Title = t;
             startDateTime = new DateTime (sDT);
             endDateTime = new DateTime (eDT);
             location = loc;
@@ -35,7 +35,7 @@ public class Meeting implements IMeeting{
     public Meeting(int eID, String t, IDateTime sDT , IDateTime eDT, String loc, IStudent std )
         {
             EventId = eID;
-            title = t;
+            Title = t;
             startDateTime = new DateTime (sDT);
             endDateTime = new DateTime (eDT);
             location = loc;
@@ -45,7 +45,7 @@ public class Meeting implements IMeeting{
     public Meeting(Meeting M )
         {
             EventId = M.EventId;
-            title = M.title;
+            Title = M.Title;
             startDateTime = new DateTime (M.startDateTime);
             endDateTime = new DateTime (M.endDateTime);
             location = M.location;
