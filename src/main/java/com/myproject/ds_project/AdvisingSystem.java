@@ -13,6 +13,7 @@ public class AdvisingSystem implements IAdvisingSystem {
     public EventList Elist= new EventList();
     //counter for events?? has no ID
     //public static int eventIDcounter=41;
+    public static int eventIDcounter=41;
     
     @Override
     public boolean loadStudentsFromCSV(String studentsFilePath) {
@@ -71,8 +72,37 @@ public class AdvisingSystem implements IAdvisingSystem {
 
     @Override 
     public boolean scheduleMeeting(String title, IDateTime startDateTime, IDateTime endDateTime, String location, int studentId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-   }
+       IStudent s=slist.findById(studentId); 
+       if (s==null)//check if student exist
+           return false;
+       
+       
+       LinkedList<IEvent> studentEvents=s.getSchedule();
+       if (!studentEvents.empty()){
+           studentEvents.findFirst();
+           while(true){
+               IEvent CurrentEvent=studentEvents.retrieve();
+               if (startDateTime.compareTo(CurrentEvent.getEndDateTime()) <0 
+                       && endDateTime.compareTo(CurrentEvent.getStartDateTime())>0 )
+                   return false;
+               if(studentEvents.last()) break;
+               studentEvents.findFirst();
+               
+           }//end check any conflict
+       }//end if
+       
+       int eventId=eventIDcounter++; //it will increased in all class
+       IEvent e=new Meeting(eventId, title, startDateTime, endDateTime, location, s); 
+       boolean addedEvent = Elist.addEvent(e);
+       if (addedEvent){
+           slist.deleteById(studentId);
+           s.getSchedule().insert(e);
+           slist.add(s);
+                   return true;
+       }
+       return false;
+       
+    }
 
     @Override
     public boolean scheduleWorkshop(String title, IDateTime startDateTime, IDateTime endDateTime, String location, int[] studentIds) {
