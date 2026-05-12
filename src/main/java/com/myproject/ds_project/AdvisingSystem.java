@@ -29,11 +29,11 @@ public class AdvisingSystem implements IAdvisingSystem {
             while (read.hasNextLine()) {
                 String[] d = read.nextLine().trim().split(",");
                 IStudent s = new Student(                        
-                        Integer.parseInt(d[0]),
+                        Integer.parseInt(d[0]),//student_id
                         d[1],
                         d[2],
                         d[3],
-                        Integer.parseInt(d[4]),
+                        Integer.parseInt(d[4]),//year level 
                         d[5]
                 );
 
@@ -55,7 +55,7 @@ public class AdvisingSystem implements IAdvisingSystem {
 
     @Override
     public boolean addStudent(IStudent student) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return studentList.add(student);
     }
 
     @Override
