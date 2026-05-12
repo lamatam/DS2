@@ -19,7 +19,33 @@ public class AdvisingSystem implements IAdvisingSystem {
     //by sarah 
     @Override
     public boolean loadStudentsFromCSV(String studentsFilePath) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Scanner read = new Scanner(new File(studentsfilePath));
+
+            if (read.hasNextLine()) {
+                read.nextLine();
+            }
+
+            while (read.hasNextLine()) {
+                String[] d = read.nextLine().trim().split(",");
+                IStudent s = new Student(                        
+                        Integer.parseInt(d[0]),
+                        d[1],
+                        d[2],
+                        d[3],
+                        Integer.parseInt(d[4]),
+                        d[5]
+                );
+
+                addStudent(s);
+            }
+            read.close();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
