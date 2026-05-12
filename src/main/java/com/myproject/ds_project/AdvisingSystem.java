@@ -6,7 +6,7 @@ package com.myproject.ds_project;
 
 /**
  *
- * @author loolo
+ * @author loloo
  */
 public class AdvisingSystem implements IAdvisingSystem {
     public StudentList slist= new StudentList();
@@ -14,7 +14,9 @@ public class AdvisingSystem implements IAdvisingSystem {
     //counter for events?? has no ID
     //public static int eventIDcounter=41;
     public static int eventIDcounter=41;
-    
+
+
+    //by sarah 
     @Override
     public boolean loadStudentsFromCSV(String studentsFilePath) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -64,7 +66,7 @@ public class AdvisingSystem implements IAdvisingSystem {
     public void printAllStudents() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+//-------- end sarah
     @Override
     public boolean deleteStudent(int studentId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -108,7 +110,7 @@ public class AdvisingSystem implements IAdvisingSystem {
     public boolean scheduleWorkshop(String title, IDateTime startDateTime, IDateTime endDateTime, String location, int[] studentIds) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+/// ----start sarah
     @Override
     public void printEventDetailsByTitle(String title) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -130,3 +132,4 @@ public class AdvisingSystem implements IAdvisingSystem {
     }
     
 }
+//-----end sarah
