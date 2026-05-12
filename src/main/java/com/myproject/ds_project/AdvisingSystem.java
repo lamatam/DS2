@@ -110,15 +110,16 @@ public class AdvisingSystem implements IAdvisingSystem {
                       pure_eventList.addEvent(w1);
                       pure_workShoptList.insert(w1);
                       w1.addParticipant(student);                      
-                    }                   
+                             }                   
+                       }
                 }
-            }
           schedule_All_workShops();
             read.close();
           
             return true;
-        } catch (Exception e) {
-            System.out.println("error read");
+        
+        }catch (Exception e) {
+            System.out.println(" error reading ! ");
             System.out.println(e.getMessage());
             return false;
         }
