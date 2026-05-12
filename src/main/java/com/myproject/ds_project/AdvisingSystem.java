@@ -20,15 +20,15 @@ public class AdvisingSystem implements IAdvisingSystem {
     @Override
     public boolean loadStudentsFromCSV(String studentsFilePath) {
         try {
-            Scanner read = new Scanner(new File(studentsfilePath));
+            Scanner scanner = new Scanner(new File(studentsfilePath));
 
             if (read.hasNextLine()) {
                 read.nextLine();
             }
 
             while (read.hasNextLine()) {
-                String[] d = read.nextLine().trim().split(",");
-                IStudent s = new Student(                        
+                String[] studentData = read.nextLine().trim().split(",");
+                IStudent student = new Student(                        
                         Integer.parseInt(d[0]),//student_id
                         d[1],
                         d[2],
@@ -52,16 +52,16 @@ public class AdvisingSystem implements IAdvisingSystem {
     public boolean loadEventsFromCSV(String eventsFilePath) {
         try {
 
-            Scanner read = new Scanner(new File(eventfilePath));
+            Scanner scanner = new Scanner(new File(eventsFilePath));
             
-            if (read.hasNextLine()) {
-                read.nextLine();
+            if (scanner.hasNextLine()) {
+               scanner.nextLine();
             }
             int not_exist_in_event_id=-1;
-            while (read.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                  boolean stud_not_exist=false;
                
-                String line = read.nextLine();
+                String line = scanner.nextLine();
                 String[] d = line.trim().split(",");
 
                 int eventId = Integer.parseInt(d[0]);
@@ -84,15 +84,14 @@ public class AdvisingSystem implements IAdvisingSystem {
                 }
                else if(eventId== not_exist_in_event_id)
                    continue;
-                //  MEETING               
+                // meeting              
                 if (type.equalsIgnoreCase("Meeting")) {
                      IEvent m = new Meeting(eventId, title, start, end, location, student);
                        pure_eventList.addEvent(m);
-                      // pure_meetings.insert(m);
-                       //schedule meeting
+                  
+                       //schedule meeting 
                     boolean sched = scheduleMeeting("-1", start, end, location, studentId);                    
                     if (sched == true) {                      
-                        student.getSchedule().insert(m);
                         scheduled_eventList.addEvent(m);
                     }
 
@@ -114,7 +113,7 @@ public class AdvisingSystem implements IAdvisingSystem {
                        }
                 }
           schedule_All_workShops();
-            read.close();
+           scanner.close();
           
             return true;
         
@@ -204,12 +203,34 @@ public class AdvisingSystem implements IAdvisingSystem {
        return false;
        
     }
-
+// ----start sarah
     @Override
     public boolean scheduleWorkshop(String title, IDateTime startDateTime, IDateTime endDateTime, String location, int[] studentIds) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+ Workshop m = new Workshop(-1, title, start, end, location);
+        for (int i = 0; i < studentIds.length; i++) {
+            IStudent s = searchStudentById(studentIds[i]);
+            if (s == null) {
+                return false;
+            }
+            LinkedList<IEvent> student_schedule = s.getSchedule();
+            boolean is_conflict = is_Event_conflict_with_student_schedule(m, student_schedule);
+            if (is_conflict) {
+                return false;
+            } 
+        }
+       if (!title.equals("-1")) // If the workshop is manually scheduled
+       {
+            scheduled_eventList.addEvent(m);
+       
+        for (int i = 0; i < studentIds.length; i++) {
+            IStudent s = searchStudentById(studentIds[i]);           
+             LinkedList<IEvent> student_schedule = s.getSchedule();
+             student_schedule.insert(m);
+        }        
+      }   
+     return true;
     }
-/// ----start sarah
+    }
     @Override
     public void printEventDetailsByTitle(String title) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
