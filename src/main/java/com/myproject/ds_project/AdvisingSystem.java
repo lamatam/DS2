@@ -50,8 +50,80 @@ public class AdvisingSystem implements IAdvisingSystem {
 
     @Override
     public boolean loadEventsFromCSV(String eventsFilePath) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        try {
+
+            Scanner read = new Scanner(new File(eventfilePath));
+            
+            if (read.hasNextLine()) {
+                read.nextLine();
+            }
+            int not_exist_in_event_id=-1;
+            while (read.hasNextLine()) {
+                 boolean stud_not_exist=false;
+               
+                String line = read.nextLine();
+                String[] d = line.trim().split(",");
+
+                int eventId = Integer.parseInt(d[0]);
+                String title = d[1];
+                String type = d[2];
+                int studentId = Integer.parseInt(d[3]);
+
+                IDateTime start = parseDateTime(d[4]);                
+
+                IDateTime end = parseDateTime(d[5]);
+                String location = d[6];
+
+                IStudent student =searchStudentById(studentId); //studentList.findById(studentId); 
+                if (student == null) {                    
+                    if (type.equalsIgnoreCase("Workshop")){
+                        stud_not_exist=true;
+                         not_exist_in_event_id=eventId;
+                      }
+                  continue;
+                }
+               else if(eventId== not_exist_in_event_id)
+                   continue;
+                //  MEETING               
+                if (type.equalsIgnoreCase("Meeting")) {
+                     IEvent m = new Meeting(eventId, title, start, end, location, student);
+                       pure_eventList.addEvent(m);
+                      // pure_meetings.insert(m);
+                       //schedule meeting
+                    boolean sched = scheduleMeeting("-1", start, end, location, studentId);                    
+                    if (sched == true) {                      
+                        student.getSchedule().insert(m);
+                        scheduled_eventList.addEvent(m);
+                    }
+
+                } else if (type.equalsIgnoreCase("Workshop")) {
+                     
+                    if(!pure_workShoptList.empty()&&eventId==pure_workShoptList.retrieve().getEventId())
+                    {
+                      ((Workshop) pure_workShoptList.retrieve()).addParticipant(student);   
+                       
+                    }
+                    
+                   else if(pure_workShoptList.empty()||eventId>pure_workShoptList.retrieve().getEventId())
+                    {
+                      Workshop w1 = new Workshop(eventId, title, start, end, location);
+                      pure_eventList.addEvent(w1);
+                      pure_workShoptList.insert(w1);
+                      w1.addParticipant(student);                      
+                    }                   
+                }
+            }
+          schedule_All_workShops();
+            read.close();
+          
+            return true;
+        } catch (Exception e) {
+            System.out.println("error read");
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }    
 
     @Override
     public boolean addStudent(IStudent student) {
