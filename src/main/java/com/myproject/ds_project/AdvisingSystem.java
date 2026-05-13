@@ -340,25 +340,54 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
     }
     @Override
     public void printEventDetailsByTitle(String title) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        displayEventList(scheduled_eventList.findByTitle(title));
     }
 
     @Override
     public void printEventDetailsByStudentName(String studentName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+     displayEventList(scheduled_eventList.findByStudentName(studentName));   
+}
 
     @Override
-    public void printWorkshopStudents(String workshopTitle) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public void printWorkshopStudents(String workshopTitle)  {
+
+       LinkedList<IEvent> list=scheduled_eventList.getAllAlphabetically();
+        if (list.empty()) {
+            System.out.println("no events exist");
+            return;
+        }
+        list.findFirst();
+
+        while (true) {
+            IEvent e = list.retrieve();       
+
+            if( (e instanceof Workshop)
+               &&e.getTitle().equalsIgnoreCase(title))
+            {         
+                     System.out.println("event id: "+e.getEventId());
+                     System.out.println("event type: "+e.getEventType());
+                     System.out.println("event title: "+e.getTitle());
+                    System.out.print("Student Id(s): ");
+                     LinkedList<IStudent> p= ((Workshop) e).getParticipants();
+                     printParticipants(p);///oo
+            }              
+
+            if (list.last()) 
+            {
+                break;
+            }
+
+            list.findNext();
+        }
+    }  
+    
 
     @Override
     public void printAllEventsAlphabetically() {
        printEventList(scheduled_eventList.getAllAlphabetically());
       System.out.println("num of all schedulled events="+scheduled_eventList.size());
     }
-    }
+    }//-----end sarah
+
     
 }
-//-----end sarah
