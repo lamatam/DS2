@@ -15,17 +15,17 @@ public class AdvisingSystem implements IAdvisingSystem {
     //public static int eventIDcounter=41;
     public static int eventIDcounter=41;
     private IEventList scheduled_eventList;
-    private IEventList pure_eventList;//+
-    private LinkedList<IEvent> pure_workShoptList;//+
+    private IEventList pure_eventList;//oo
+    private LinkedList<IEvent> pure_workShoptList;//oo
 
-
+///oo
      public AdvisingSystem() {
         this.studentList = new StudentList();
         this.scheduled_eventList = new EventList();
         pure_eventList = new EventList();
         pure_workShoptList = new LinkedList<>();
     
-    }//+
+    }//oo
 
     //by sarah 
     @Override
@@ -150,7 +150,7 @@ public class AdvisingSystem implements IAdvisingSystem {
     public IStudent searchStudentByEmail(String email) {
       return studentList.findByEmail(email);
     }
-
+//============================oo
     @Override
     public void printStudentsByMajor(String major) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -205,7 +205,7 @@ private void printStudentList(LinkedList<IStudent> list) {
         list.findNext();
     }
 }
-
+/////oooo
 public IStudent searchStudentByName(String name) {
 
     LinkedList<IStudent> list = studentList.findByName(name);
@@ -217,7 +217,9 @@ public IStudent searchStudentByName(String name) {
     list.findFirst();
 
     return list.retrieve();
-}
+}////oooo
+
+    
 // Print IDs of workshop participants.
 private void printParticipants(LinkedList<IStudent> list) {
 
