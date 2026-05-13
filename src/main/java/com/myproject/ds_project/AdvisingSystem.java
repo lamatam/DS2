@@ -14,7 +14,18 @@ public class AdvisingSystem implements IAdvisingSystem {
     //counter for events?? has no ID
     //public static int eventIDcounter=41;
     public static int eventIDcounter=41;
+    private IEventList scheduled_eventList;
+    private IEventList pure_eventList;//+
+    private LinkedList<IEvent> pure_workShoptList;//+
 
+
+     public AdvisingSystem() {
+        this.studentList = new StudentList();
+        this.scheduled_eventList = new EventList();
+        pure_eventList = new EventList();
+        pure_workShoptList = new LinkedList<>();
+    
+    }//+
 
     //by sarah 
     @Override
@@ -132,12 +143,12 @@ public class AdvisingSystem implements IAdvisingSystem {
 
     @Override
     public IStudent searchStudentById(int studentId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return studentList.findById(studentId);
     }
 
     @Override
     public IStudent searchStudentByEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      return studentList.findByEmail(email);
     }
 
     @Override
@@ -217,7 +228,7 @@ public class AdvisingSystem implements IAdvisingSystem {
             if (is_conflict) {
                 return false;
             } 
-        }
+        }//end if 
        if (!title.equals("-1")) // If the workshop is manually scheduled
        {
             scheduled_eventList.addEvent(m);
