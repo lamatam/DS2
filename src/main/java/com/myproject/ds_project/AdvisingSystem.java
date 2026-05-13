@@ -153,27 +153,29 @@ public class AdvisingSystem implements IAdvisingSystem {
 //============================oo
     @Override
     public void printStudentsByMajor(String major) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        printStudentList(studentList.findByMajor(major));    
     }
 
     @Override
     public void printStudentsByYearLevel(int yearLevel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        printStudentList(studentList.findByYearLevel(yearLevel));  
     }
 
     @Override
     public void printStudentsByName(String fullName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         printStudentList(studentList.findByName(fullName));   
     }
 
     @Override
     public void printStudentsByPartialName(String partialName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       printStudentList(studentList.findByNameContains(partialName));   
     }
 
     @Override
     public void printAllStudents() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       printStudentList(studentList.getAll());
+    System.out.println("num of allstudents=" + studentList.size());   
+    
     }
 
  // useing Helper methods used to printing student info
