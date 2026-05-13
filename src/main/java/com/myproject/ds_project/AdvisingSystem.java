@@ -355,7 +355,9 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
 
     @Override
     public void printAllEventsAlphabetically() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       printEventList(scheduled_eventList.getAllAlphabetically());
+      System.out.println("num of all schedulled events="+scheduled_eventList.size());
+    }
     }
     
 }
