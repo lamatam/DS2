@@ -175,6 +175,98 @@ public class AdvisingSystem implements IAdvisingSystem {
     public void printAllStudents() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+ // useing Helper methods used to printing student info
+
+ // Print all students in the given list with their schedules.
+private void printStudentList(LinkedList<IStudent> list) {
+
+    if (list.empty()) {
+        System.out.println("no existing students");
+        return;
+    }
+
+    list.findFirst();
+
+    while (true) {
+
+        IStudent student = list.retrieve();
+
+        System.out.println(student);
+
+        printStudentSchedule(student.getSchedule());
+
+        System.out.println("\n-----------------------------------");
+
+        if (list.last()) {
+            break;
+        }
+
+        list.findNext();
+    }
+}
+
+public IStudent searchStudentByName(String name) {
+
+    LinkedList<IStudent> list = studentList.findByName(name);
+
+    if (list.empty()) {
+        return null;
+    }
+
+    list.findFirst();
+
+    return list.retrieve();
+}
+// Print IDs of workshop participants.
+private void printParticipants(LinkedList<IStudent> list) {
+
+    if (list.empty()) {
+        System.out.println("no events exist");
+        return;
+    }
+
+    list.findFirst();
+
+    while (true) {
+
+        IStudent student = list.retrieve();
+
+        System.out.print(student.getStudentId() + ",");
+
+        if (list.last()) {
+            break;
+        }
+
+        list.findNext();
+    }
+
+    System.out.println("\n-----------------------------------");
+}
+    
+// Print event IDs from a student's schedule.
+private void printStudentSchedule(LinkedList<IEvent> list) {
+
+    if (list.empty()) {
+        System.out.println("no events exist");
+        return;
+    }
+
+    list.findFirst();
+
+    while (true) {
+
+        System.out.print(list.retrieve().getEventId() + ",");
+
+        if (list.last()) {
+            break;
+        }
+
+        list.findNext();
+    }
+
+    System.out.println("\n--------------");
+}
 //-------- end sarah
     @Override
     public boolean deleteStudent(int studentId) {
