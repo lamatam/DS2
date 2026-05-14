@@ -123,7 +123,7 @@ public class AdvisingSystem implements IAdvisingSystem {
                              }                   
                        }
                 }
-          schedule_All_workShops();//999
+          schedule_All_workShops();//done
            scanner.close();
           
             return true;
@@ -135,6 +135,51 @@ public class AdvisingSystem implements IAdvisingSystem {
         }
 
     }    
+     private boolean schedule_All_workShops() {       
+        if (pure_workShoptList.empty()) {
+            System.out.println("no workshops");
+            return false;
+        } else {
+                 pure_workShoptList.findFirst();                 
+              while (true) 
+              {
+                 Workshop cur =(Workshop) pure_workShoptList.retrieve();
+                 LinkedList<IStudent>Participants =cur.getParticipants();
+                    if(Participants.empty() ){
+                       scheduled_eventList.addEvent(cur);                       
+                       return true;
+                    }
+                    int[] ids = new int[Participants.size()];
+                    Participants.findFirst();
+                    for (int i = 0; i < Participants.size(); i++) {
+                        ids[i] = Participants.retrieve().getStudentId();
+                        if(!Participants.last())
+                           Participants.findNext();
+                     }
+                    
+                boolean sched=scheduleWorkshop("-1",cur.getStartDateTime(),cur.getEndDateTime(),cur.getLocation(), ids); 
+               
+                if(sched==true)
+                {                
+                    scheduled_eventList.addEvent(cur);                 
+                    Participants.findFirst();
+                    for (int i = 0; i < Participants.size(); i++) {
+                        Participants.retrieve().getSchedule().insert(cur);
+                        if(!Participants.last())
+                           Participants.findNext();
+                     }
+                }
+//                             
+                
+                if(pure_workShoptList.last())  break;
+                
+                pure_workShoptList.findNext();
+                }
+                return true;
+            }      
+    }  
+ 
+
 
     @Override
     public boolean addStudent(IStudent student) {
