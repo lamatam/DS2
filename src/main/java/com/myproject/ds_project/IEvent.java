@@ -10,6 +10,10 @@ public interface IEvent extends Comparable<IEvent> {
 	
 	// Returns the title of the event.
 	String getTitle();
+
+
+	// Returns the type of the event.
+      String getEventType();
 	
 	// Sets the title of the event.
 	void setTitle(String title);
