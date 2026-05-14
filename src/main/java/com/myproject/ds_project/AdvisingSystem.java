@@ -80,9 +80,9 @@ public class AdvisingSystem implements IAdvisingSystem {
                 String type = d[2];
                 int studentId = Integer.parseInt(d[3]);
 
-                IDateTime start = parseDateTime(d[4]);                
+                IDateTime start = parseDateTime(d[4]);  ///999              
 
-                IDateTime end = parseDateTime(d[5]);
+                IDateTime end = parseDateTime(d[5]);///9999
                 String location = d[6];
 
                 IStudent student =searchStudentById(studentId); //studentList.findById(studentId); 
@@ -123,7 +123,7 @@ public class AdvisingSystem implements IAdvisingSystem {
                              }                   
                        }
                 }
-          schedule_All_workShops();
+          schedule_All_workShops();//999
            scanner.close();
           
             return true;
