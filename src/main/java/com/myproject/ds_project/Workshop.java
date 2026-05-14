@@ -130,5 +130,9 @@ public class Workshop implements IWorkshop{
     public int compareTo(IEvent other) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+//
+    @Override
+public String getEventType() {
+    return "Workshop";
+}
 }
