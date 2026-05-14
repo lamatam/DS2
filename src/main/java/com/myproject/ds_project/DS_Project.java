@@ -40,9 +40,56 @@ public class DS_Project {
     //System.out.println("16. Print event details by student name");
 
     System.out.print("\nEnter your choice: ");
-
     int choice = input.nextInt();
     input.nextLine();
+    switch (choice){
+            case 1: // add new student 
+            
+            case 2: // search for student
+            
+            case 3: // delete student by ID
+            
+            case 4: //Schedual new workshop or new mwwtwing
+            
+            case 5: // print event details
+            
+            case 6: 
+            {
+                System.out.print("Enter student partial name:");
+                String name=input.nextLine();
+                name=input.nextLine();
+                System.out.println("");
+                advisingSystem.printStudentsByPartialName(name);
+                }
+            break;
+            case 7: 
+            advisingSystem.printAllEventsAlphabetically();
+             break;
+            case 8:
+            {
+            System.out.print("Enter the workshop/meeting tite");
+            String WorkshopTitle=input.nextLine();
+            WorkshopTitle=input.nextLine();
+            advisisngSystem.printWorkshopStudents(WorkshopTitle);
+            }
+            break;
+            
+            case 9:
+            advisingSystem.printAllStudents();
+            break;
+            
+            case 10:
+            System.out.println("Goodbye!");
+            break;
+            
+        default:
+            System.out.println("Bad choice! Try again");
+            
+            
+            
+            
+    }
+            
 }
     }
 }
