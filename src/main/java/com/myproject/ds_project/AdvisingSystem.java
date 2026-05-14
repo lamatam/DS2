@@ -207,7 +207,7 @@ private void printStudentList(LinkedList<IStudent> list) {
         list.findNext();
     }
 }
-/////oooo
+/////done
 private IDateTime parseDateTime(String input) {
 
         String[] parts = input.trim().split(" ");
@@ -331,14 +331,14 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
 // ----start sarah
     @Override
     public boolean scheduleWorkshop(String title, IDateTime startDateTime, IDateTime endDateTime, String location, int[] studentIds) {
- Workshop m = new Workshop(-1, title, startDateTime, endDateTime, location);
+ Workshop m = new Workshop(-1, title, startDateTime, endDateTime, location);///done
         for (int i = 0; i < studentIds.length; i++) {
             IStudent s = searchStudentById(studentIds[i]);
             if (s == null) {
                 return false;
             }
             LinkedList<IEvent> student_schedule = s.getSchedule();
-            boolean is_conflict = is_Event_conflict_with_student_schedule(m, student_schedule);////999
+            boolean is_conflict = is_Event_conflict_with_student_schedule(m, student_schedule);////done
             if (is_conflict) {
                 return false;
             } 
@@ -356,6 +356,30 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
      return true;
     }
     }
+ // true if conflict false if no conflict
+    private boolean is_Event_conflict_with_student_schedule(IEvent e, LinkedList<IEvent> student_schedule) {
+        if (student_schedule.empty()) {
+            return false;
+        }
+        student_schedule.findFirst();
+      
+        while (true) {
+            IEvent current = student_schedule.retrieve();
+            if (is_2_Events_Conflict(current, e)) {
+                return true;
+            }
+
+            if (student_schedule.last()) {
+                break;
+            }
+
+            student_schedule.findNext();
+
+        }
+        return false;
+    }
+
+
     @Override
     public void printEventDetailsByTitle(String title) {
         displayEventList(scheduled_eventList.findByTitle(title));///999
