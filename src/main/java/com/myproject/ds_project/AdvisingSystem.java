@@ -313,7 +313,7 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
 // ----start sarah
     @Override
     public boolean scheduleWorkshop(String title, IDateTime startDateTime, IDateTime endDateTime, String location, int[] studentIds) {
- Workshop m = new Workshop(-1, title, start, end, location);
+ Workshop m = new Workshop(-1, title, startDateTime, endDateTime, location);
         for (int i = 0; i < studentIds.length; i++) {
             IStudent s = searchStudentById(studentIds[i]);
             if (s == null) {
