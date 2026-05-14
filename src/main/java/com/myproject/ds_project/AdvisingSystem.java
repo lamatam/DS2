@@ -15,17 +15,17 @@ public class AdvisingSystem implements IAdvisingSystem {
     //public static int eventIDcounter=41;
     public static int eventIDcounter=41;
     private IEventList scheduled_eventList;
-    private IEventList pure_eventList;//oo
-    private LinkedList<IEvent> pure_workShoptList;//oo
+    private IEventList pure_eventList;//check
+    private LinkedList<IEvent> pure_workShoptList;//check
 
-///oo
+///check
      public AdvisingSystem() {
         this.studentList = new StudentList();
         this.scheduled_eventList = new EventList();
         pure_eventList = new EventList();
         pure_workShoptList = new LinkedList<>();
     
-    }//oo
+    }
 
     //by sarah 
     @Override
@@ -80,9 +80,9 @@ public class AdvisingSystem implements IAdvisingSystem {
                 String type = d[2];
                 int studentId = Integer.parseInt(d[3]);
 
-                IDateTime start = parseDateTime(d[4]);  ///999              
+                IDateTime start = parseDateTime(d[4]);  ///done             
 
-                IDateTime end = parseDateTime(d[5]);///9999
+                IDateTime end = parseDateTime(d[5]);///done
                 String location = d[6];
 
                 IStudent student =searchStudentById(studentId); //studentList.findById(studentId); 
@@ -208,6 +208,24 @@ private void printStudentList(LinkedList<IStudent> list) {
     }
 }
 /////oooo
+private IDateTime parseDateTime(String input) {
+
+        String[] parts = input.trim().split(" ");
+
+        String[] date = parts[0].split("/");
+        String[] time = parts[1].split(":");
+        
+
+        int month = Integer.parseInt(date[0]);
+        int day = Integer.parseInt(date[1]);
+        int year = Integer.parseInt(date[2]);
+
+        int hour = Integer.parseInt(time[0]);
+        int minute = Integer.parseInt(time[1]);
+
+        return new DateTime(year, month, day, hour, minute);
+    }
+
 public IStudent searchStudentByName(String name) {
 
     LinkedList<IStudent> list = studentList.findByName(name);
