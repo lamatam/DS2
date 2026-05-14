@@ -320,7 +320,7 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
                 return false;
             }
             LinkedList<IEvent> student_schedule = s.getSchedule();
-            boolean is_conflict = is_Event_conflict_with_student_schedule(m, student_schedule);
+            boolean is_conflict = is_Event_conflict_with_student_schedule(m, student_schedule);////999
             if (is_conflict) {
                 return false;
             } 
@@ -340,12 +340,12 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
     }
     @Override
     public void printEventDetailsByTitle(String title) {
-        displayEventList(scheduled_eventList.findByTitle(title));
+        displayEventList(scheduled_eventList.findByTitle(title));///999
     }
 
     @Override
     public void printEventDetailsByStudentName(String studentName) {
-     displayEventList(scheduled_eventList.findByStudentName(studentName));   
+     displayEventList(scheduled_eventList.findByStudentName(studentName));   ///999
 }
 
     @Override
@@ -365,7 +365,7 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
                &&e.getTitle().equalsIgnoreCase(title))
             {         
                      System.out.println("event id: "+e.getEventId());
-                     System.out.println("event type: "+e.getEventType());
+                     System.out.println("event type: "+e.getEventType());//999
                      System.out.println("event title: "+e.getTitle());
                     System.out.print("Student Id(s): ");
                      LinkedList<IStudent> p= ((Workshop) e).getParticipants();
