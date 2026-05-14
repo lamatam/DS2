@@ -180,7 +180,6 @@ public class AdvisingSystem implements IAdvisingSystem {
     }  
  
 
-
     @Override
     public boolean addStudent(IStudent student) {
         return studentList.add(student);
@@ -285,7 +284,7 @@ public IStudent searchStudentByName(String name) {
 }////oooo
 
     
-// Print IDs of workshop participants.
+// Print ID of workshop participants.
 private void printParticipants(LinkedList<IStudent> list) {
 
     if (list.empty()) {
