@@ -40,12 +40,12 @@ public class AdvisingSystem implements IAdvisingSystem {
             while (read.hasNextLine()) {
                 String[] studentData = read.nextLine().trim().split(",");
                 IStudent student = new Student(                        
-                        Integer.parseInt(d[0]),//student_id
-                        d[1],
-                        d[2],
-                        d[3],
-                        Integer.parseInt(d[4]),//year level 
-                        d[5]
+                        Integer.parseInt(studentData[0]),//student_id
+                        studentData[1],
+                        studentData[2],
+                        studentData[3],
+                        Integer.parseInt(studentData[4]),//year level 
+                        studentData[5]
                 );
 
                 addStudent(s);
