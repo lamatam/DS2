@@ -342,10 +342,28 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
 }
 //-------- end sarah
     @Override
-    public boolean deleteStudent(int studentId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean deleteStudent(int studentId) {//Deletes a student and performs cascade deletion of associated events
+        IStudent student = slist.findById(studentId);
+        if(student == null) 
+            return false;
+        LinkedList<IEvent> studentSchedule = student.getSchedule();
+        studentSchedule.findFirst();
+        IEvent event = null;
+        for(int i = 0; i < studentSchedule.size; i++) {
+            event = (IEvent)studentSchedule.retrieve();
+            if (event instanceof IMeeting)//All meetings involving the student are deleted.
+                Elist.removeEventById(event.getEventId());
+            if(event instanceof IWorkshop) {//The student is removed from any workshops.
+                IWorkshop workshop = (IWorkshop) event;
+                workshop.removeParticipantById(studentId);
+                if(workshop.isEmpty())//Workshops with no remaining participants are deleted.
+                    Elist.removeEventById(event.getEventId());
+            }
+            studentSchedule.findNext();
+        }
+        return slist.deleteById(studentId);//It returns true if deletion occurred
     }
-
+   
     @Override 
     public boolean scheduleMeeting(String title, IDateTime startDateTime, IDateTime endDateTime, String location, int studentId) {
        IStudent s=slist.findById(studentId); 
@@ -507,4 +525,3 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
 
     
 }
-
