@@ -29,7 +29,7 @@ public class DateTime implements IDateTime {
         this.minute = Integer.parseInt(date.substring( first_dots+1));
         
     }
-    public DateTime ( int year, int month, int day , int hour, int mintue)
+    public DateTime ( int year, int month, int day , int hour, int minute)
     {
         this.year = year;
         this.month = month;
