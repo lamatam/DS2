@@ -72,7 +72,7 @@ public class Workshop extends Event implements IWorkshop {
     @Override
     public boolean removeParticipantById(int studentId) {
         if (!hasStudent(studentId)) {
-            return false; //kk in main put System.out.println("There is no such a student participated in this workshop");
+            return false; //There is no such a student participated in this workshop
         }
         students.deleteById(studentId);
         return true;
