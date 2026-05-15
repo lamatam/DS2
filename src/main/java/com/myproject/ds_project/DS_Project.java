@@ -79,8 +79,21 @@ public class DS_Project {
 
             case 2: // search for student
             
-            case 3: // delete student by ID
-            
+           // delete student by ID
+              case 3 : {
+
+                    System.out.print("Enter student ID to delete: ");
+                    int id = input.nextInt();
+
+                    if (system.deleteStudent(id)) {
+                        System.out.println("Student deleted successfully!");
+                    } else {
+                        System.out.println("Student not found!");
+                    }
+
+                    break;
+                }
+
             case 4: //Schedual new workshop or new mwwtwing
             
             case 5: // print event details
