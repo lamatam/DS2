@@ -422,8 +422,18 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
         }
         return false;
     }
+      //true if conflict  false if no conflict
+     private boolean is_2_Events_Conflict(IEvent e1, IEvent e2) {
+        if (e1.getEndDateTime().compareTo(e2.getStartDateTime()) <=0) {
+            return false;
+        } else if (e2.getEndDateTime().compareTo(e1.getStartDateTime()) <= 0) {
+            return false;
+        }
 
+        return true;
+    }
 
+//================
     @Override
     public void printEventDetailsByTitle(String title) {
         displayEventList(scheduled_eventList.findByTitle(title));///999
