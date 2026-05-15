@@ -81,7 +81,7 @@ int choice2;
 
 
             case 2: // search for student
-            System.out.println("Enter search criteria: ");
+            System.out.print("Enter search criteria: ");
                 System.out.println("1. Name " ); // by name
                 System.out.println("2. Student ID"); // by id
                 System.out.println("3. Email"); // by id
@@ -91,7 +91,7 @@ int choice2;
                 switch( choice2)
                 {
                     case 1:
-                        System.out.println("Enter the student's name: ");
+                        System.out.print("Enter the student's name: ");
                         String name = input.nextLine();
                         //name = input.nextLine();
                         advisingSystem.printStudentsByName(name);
@@ -149,10 +149,10 @@ int choice2;
 
             case 4: //Schedual new workshop or new mwwtwing
              {
-                System.out.println("Enter search criteria: ");
+                System.out.print("Enter search criteria: ");
                 System.out.println("1. Workshop " );
                 System.out.println("2. Meeting");
-                System.out.println("\n Enter your choice: ");
+                System.out.print("\n Enter your choice: ");
                 choice2 = input.nextInt();
                 input.nextLine();
                 switch( choice2)
@@ -243,7 +243,7 @@ int choice2;
                 break;
             case 5: // print event details
             {
-                System.out.println("Enter search criteria: ");
+                System.out.print("Enter search criteria: ");
                 System.out.println("1. Student name " );
                 System.out.println("2. Workshop/Meeting title");
                 System.out.println("\n Enter your choice: ");
@@ -252,7 +252,7 @@ int choice2;
                 switch( choice2)
                 {
                     case 1:
-                        System.out.println("Enter student Name : ");
+                        System.out.print("Enter student Name : ");
                         name = input.nextLine();
                         name = input.nextLine();
                         advisingSystem.printEventDetailsByStudentName(name);
