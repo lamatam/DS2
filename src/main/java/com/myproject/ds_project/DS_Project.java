@@ -119,7 +119,7 @@ int choice2;
                         System.out.println("Bad choice , try again");
                 }
             
-            }
+            
             break;
            // delete student by ID
               case 3 : {
@@ -310,3 +310,4 @@ int choice2;
 }
     }
 }
+
