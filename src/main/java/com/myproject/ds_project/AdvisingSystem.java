@@ -468,7 +468,13 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
     }
     @Override
     public void printEventDetailsByTitle(String title) {
-    	Elist.findByTitle(title).printList(); //now
+    	LinkedList<IEvent> result = Elist.findByTitle(title);
+
+if (result == null || result.empty()) {
+    System.out.println("No event found with this title.");
+} else {
+    result.printList();
+}
     }
 
     @Override

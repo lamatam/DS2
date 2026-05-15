@@ -19,10 +19,12 @@ public static Scanner input = new Scanner (System.in);
         
 int choice;
 int choice2;
+
+   System.out.println("\nWelcome to the Student Advising System!");
+
         //menu
         while (true) {
 
-   System.out.println("\nWelcome to the Student Advising System!");
     System.out.println("\nPlease choose an option:");
 
     //System.out.println("0. Load data from files");
@@ -88,6 +90,7 @@ int choice2;
                 System.out.println("\n Enter your choice: ");
                 choice2 = input.nextInt();
                 input.nextLine();
+                
                 switch( choice2)
                 {
                     case 1:
@@ -248,20 +251,22 @@ int choice2;
                 System.out.println("2. Workshop/Meeting title");
                 System.out.println("\n Enter your choice: ");
                 choice2 = input.nextInt();
+                input.nextLine();
+                
                 String name;
                 switch( choice2)
                 {
                     case 1:
                         System.out.print("Enter student Name : ");
                         name = input.nextLine();
-                        name = input.nextLine();
+                        
                         advisingSystem.printEventDetailsByStudentName(name);
                         break;
                     
                     case 2:
                         System.out.print("Enter the workshop/meeting title: ");
                         name = input.nextLine();
-                        name = input.nextLine();
+
                         advisingSystem.printEventDetailsByTitle(name);
                         break;
                     
