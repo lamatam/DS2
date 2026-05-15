@@ -43,8 +43,40 @@ public class DS_Project {
     int choice = input.nextInt();
     input.nextLine();
     switch (choice){
-            case 1: // add new student 
-            
+            // add new student 
+        case 1:  {
+                    System.out.print("Enter the student's name: ");
+                    String name = input.nextLine();
+
+                    System.out.print("Enter the student's ID: ");
+                    int id = input.nextInt();
+                    input.nextLine();
+
+                    System.out.print("Enter the student's email address: ");
+                    String email = input.nextLine();
+
+                    System.out.print("Enter the student's major: ");
+                    String major = input.nextLine();
+
+                    System.out.print("Enter the student's year level: ");
+                    int year = input.nextInt();
+                    input.nextLine();
+
+                    System.out.print("Enter any notes for the student: ");
+                    String notes = input.nextLine();
+
+                    IStudent s = new Student(id,name, email, major, year, notes);
+
+                    if (system.addStudent(s)) {
+                        System.out.println("Student added successfully!");
+                    } else {
+                        System.out.println("Failed to add student!");
+                    }
+
+                    break;
+                }
+
+
             case 2: // search for student
             
             case 3: // delete student by ID
