@@ -451,11 +451,11 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
                &&e.getTitle().equalsIgnoreCase(title))
             {         
                      System.out.println("event id: "+e.getEventId());
-                     System.out.println("event type: "+e.getEventType());//999
+                     System.out.println("event type: "+e.getEventType());//done
                      System.out.println("event title: "+e.getTitle());
                     System.out.print("Student Id(s): ");
                      LinkedList<IStudent> p= ((Workshop) e).getParticipants();
-                     printParticipants(p);///oo
+                     printParticipants(p);///check
             }              
 
             if (list.last()) 
