@@ -277,7 +277,11 @@ private IDateTime parseDateTime(String input) {
     return new DateTime(year, month, day, hour, minute);
 }
 
+public LinkedList<IStudent> searchStudentByName(String name) {//////////
+    return slist.findByName(name);
+}
 /////oooo
+/*
 public IStudent searchStudentByName(String name) {
 
     LinkedList<IStudent> list = slist.findByName(name);
@@ -288,8 +292,9 @@ public IStudent searchStudentByName(String name) {
 
     list.findFirst();
 
-    return list.retrieve();
-}////oooo
+    return list.retrieve(); 
+}////oooo 
+*/
 
     
 // Print IDs of workshop participants.
