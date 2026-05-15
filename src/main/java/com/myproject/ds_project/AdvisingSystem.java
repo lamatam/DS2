@@ -9,6 +9,7 @@ package com.myproject.ds_project;
  * @author loloo
  */
 import java.util.Scanner;
+
 public class AdvisingSystem implements IAdvisingSystem {
     public StudentList slist= new StudentList();
     public EventList Elist= new EventList();

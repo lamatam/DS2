@@ -114,4 +114,15 @@ public class LinkedList<T> implements List<T> {
     {
             return size;
     }
+    public void printList(){
+         if (head != null)
+        {
+            Node<T> tmp = head;
+            while ( tmp != null)
+            {
+                System.out.println(tmp.data);
+                tmp = tmp.next;
+            }
+        }
+    }
 }
