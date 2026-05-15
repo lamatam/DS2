@@ -15,42 +15,44 @@ public class AdvisingSystem implements IAdvisingSystem {
     //public static int eventIDcounter=41;
     public static int eventIDcounter=41;
     private IEventList scheduled_eventList;
-    private IEventList pure_eventList;//check
-    private LinkedList<IEvent> pure_workShoptList;//check
+    private IEventList pure_eventList;//oo
+    private LinkedList<IEvent> pure_workShoptList;//oo
 
-///check
+///oo
      public AdvisingSystem() {
-        this.studentList = new StudentList();
+        this.slist = new StudentList();
         this.scheduled_eventList = new EventList();
         pure_eventList = new EventList();
         pure_workShoptList = new LinkedList<>();
     
-    }
+    }//oo
 
     //by sarah 
     @Override
     public boolean loadStudentsFromCSV(String studentsFilePath) {
         try {
-            Scanner scanner = new Scanner(new File(studentsfilePath));
+            Scanner scanner = new Scanner(new File(studentsFilePath));
 
-            if (read.hasNextLine()) {
-                read.nextLine();
+            if (scanner.hasNextLine()) {
+            	scanner.nextLine();
             }
 
-            while (read.hasNextLine()) {
-                String[] studentData = read.nextLine().trim().split(",");
-                IStudent student = new Student(                        
-                        Integer.parseInt(studentData[0]),//student_id
-                        studentData[1],
-                        studentData[2],
-                        studentData[3],
-                        Integer.parseInt(studentData[4]),//year level 
-                        studentData[5]
-                );
+            while (scanner.hasNextLine()) {
+            	
+            	 String[] studentData = scanner.nextLine().trim().split(","); //scanner
+            	 IStudent student = new Student(
+            	            Integer.parseInt(studentData[0])
+            	    );
 
-                addStudent(s);
+            	    student.setName(studentData[1]);
+            	    student.setEmail(studentData[2]);
+            	    student.setMajor(studentData[3]);
+            	    student.setYearLevel(Integer.parseInt(studentData[4]));
+            	    student.setNotes(studentData[5]);
+
+                addStudent(student); 
             }
-            read.close();
+            scanner.close();
             return true;
 
         } catch (Exception e) {
@@ -68,11 +70,15 @@ public class AdvisingSystem implements IAdvisingSystem {
             if (scanner.hasNextLine()) {
                scanner.nextLine();
             }
+            
             int not_exist_in_event_id=-1;
+            
+            
             while (scanner.hasNextLine()) {
                  boolean stud_not_exist=false;
                
                 String line = scanner.nextLine();
+                
                 String[] d = line.trim().split(",");
 
                 int eventId = Integer.parseInt(d[0]);
@@ -80,9 +86,9 @@ public class AdvisingSystem implements IAdvisingSystem {
                 String type = d[2];
                 int studentId = Integer.parseInt(d[3]);
 
-                IDateTime start = parseDateTime(d[4]);  ///done             
+                IDateTime start = parseDateTime(d[4]);   ///////// later            
 
-                IDateTime end = parseDateTime(d[5]);///done
+                IDateTime end = parseDateTime(d[5]);//////////// later
                 String location = d[6];
 
                 IStudent student =searchStudentById(studentId); //studentList.findById(studentId); 
@@ -123,7 +129,7 @@ public class AdvisingSystem implements IAdvisingSystem {
                              }                   
                        }
                 }
-          schedule_All_workShops();//done
+          schedule_All_workShops();//////////later
            scanner.close();
           
             return true;
@@ -135,7 +141,8 @@ public class AdvisingSystem implements IAdvisingSystem {
         }
 
     }    
-     private boolean schedule_All_workShops() {       
+    
+    private boolean schedule_All_workShops() {       
         if (pure_workShoptList.empty()) {
             System.out.println("no workshops");
             return false;
@@ -149,9 +156,9 @@ public class AdvisingSystem implements IAdvisingSystem {
                        scheduled_eventList.addEvent(cur);                       
                        return true;
                     }
-                    int[] ids = new int[Participants.size()];
+                    int[] ids = new int[Participants.getSize()];
                     Participants.findFirst();
-                    for (int i = 0; i < Participants.size(); i++) {
+                    for (int i = 0; i < Participants.getSize(); i++) {
                         ids[i] = Participants.retrieve().getStudentId();
                         if(!Participants.last())
                            Participants.findNext();
@@ -163,7 +170,7 @@ public class AdvisingSystem implements IAdvisingSystem {
                 {                
                     scheduled_eventList.addEvent(cur);                 
                     Participants.findFirst();
-                    for (int i = 0; i < Participants.size(); i++) {
+                    for (int i = 0; i < Participants.getSize(); i++) {
                         Participants.retrieve().getSchedule().insert(cur);
                         if(!Participants.last())
                            Participants.findNext();
@@ -177,48 +184,47 @@ public class AdvisingSystem implements IAdvisingSystem {
                 }
                 return true;
             }      
-    }  
- 
+    }
 
     @Override
     public boolean addStudent(IStudent student) {
-        return studentList.add(student);
+        return slist.add(student);  /////slist
     }
 
     @Override
     public IStudent searchStudentById(int studentId) {
-        return studentList.findById(studentId);
+        return slist.findById(studentId);//////
     }
 
     @Override
     public IStudent searchStudentByEmail(String email) {
-      return studentList.findByEmail(email);
+      return slist.findByEmail(email);//////
     }
 //============================oo
     @Override
     public void printStudentsByMajor(String major) {
-        printStudentList(studentList.findByMajor(major));    
+        printStudentList(slist.findByMajor(major));    //////
     }
 
     @Override
     public void printStudentsByYearLevel(int yearLevel) {
-        printStudentList(studentList.findByYearLevel(yearLevel));  
+        printStudentList(slist.findByYearLevel(yearLevel));  
     }
 
     @Override
     public void printStudentsByName(String fullName) {
-         printStudentList(studentList.findByName(fullName));   
+         printStudentList(slist.findByName(fullName));   
     }
 
     @Override
     public void printStudentsByPartialName(String partialName) {
-       printStudentList(studentList.findByNameContains(partialName));   
+       printStudentList(slist.findByNameContains(partialName));   
     }
 
     @Override
     public void printAllStudents() {
-       printStudentList(studentList.getAll());
-    System.out.println("num of allstudents=" + studentList.size());   
+       printStudentList(slist.getAll());
+    System.out.println("num of allstudents=" + slist.size());   
     
     }
 
@@ -251,28 +257,29 @@ private void printStudentList(LinkedList<IStudent> list) {
         list.findNext();
     }
 }
-/////done
+
 private IDateTime parseDateTime(String input) {
 
-        String[] parts = input.trim().split(" ");
+    String[] parts = input.trim().split(" ");
 
-        String[] date = parts[0].split("/");
-        String[] time = parts[1].split(":");
-        
+    String[] date = parts[0].split("/");
+    String[] time = parts[1].split(":");
+    
 
-        int month = Integer.parseInt(date[0]);
-        int day = Integer.parseInt(date[1]);
-        int year = Integer.parseInt(date[2]);
+    int month = Integer.parseInt(date[0]);
+    int day = Integer.parseInt(date[1]);
+    int year = Integer.parseInt(date[2]);
 
-        int hour = Integer.parseInt(time[0]);
-        int minute = Integer.parseInt(time[1]);
+    int hour = Integer.parseInt(time[0]);
+    int minute = Integer.parseInt(time[1]);
 
-        return new DateTime(year, month, day, hour, minute);
-    }
+    return new DateTime(year, month, day, hour, minute);
+}
 
+/////oooo
 public IStudent searchStudentByName(String name) {
 
-    LinkedList<IStudent> list = studentList.findByName(name);
+    LinkedList<IStudent> list = slist.findByName(name);
 
     if (list.empty()) {
         return null;
@@ -284,7 +291,7 @@ public IStudent searchStudentByName(String name) {
 }////oooo
 
     
-// Print ID of workshop participants.
+// Print IDs of workshop participants.
 private void printParticipants(LinkedList<IStudent> list) {
 
     if (list.empty()) {
@@ -355,8 +362,7 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
                        && endDateTime.compareTo(CurrentEvent.getStartDateTime())>0 )
                    return false;
                if(studentEvents.last()) break;
-               studentEvents.findFirst();
-               
+               studentEvents.findNext();
            }//end check any conflict
        }//end if
        
@@ -375,18 +381,20 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
 // ----start sarah
     @Override
     public boolean scheduleWorkshop(String title, IDateTime startDateTime, IDateTime endDateTime, String location, int[] studentIds) {
- Workshop m = new Workshop(-1, title, startDateTime, endDateTime, location);///done
+    Workshop m = new Workshop(-1, title, startDateTime, endDateTime, location);
         for (int i = 0; i < studentIds.length; i++) {
             IStudent s = searchStudentById(studentIds[i]);
             if (s == null) {
                 return false;
             }
+
             LinkedList<IEvent> student_schedule = s.getSchedule();
-            boolean is_conflict = is_Event_conflict_with_student_schedule(m, student_schedule);////done
+            boolean is_conflict = is_Event_conflict_with_student_schedule(m, student_schedule); ////now 
             if (is_conflict) {
                 return false;
-            } 
-        }//end if 
+             }//end if 
+        }
+        
        if (!title.equals("-1")) // If the workshop is manually scheduled
        {
             scheduled_eventList.addEvent(m);
@@ -396,11 +404,11 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
              LinkedList<IEvent> student_schedule = s.getSchedule();
              student_schedule.insert(m);
         }        
-      }   
+      }
+
      return true;
     }
-    }
- // true if conflict false if no conflict
+
     private boolean is_Event_conflict_with_student_schedule(IEvent e, LinkedList<IEvent> student_schedule) {
         if (student_schedule.empty()) {
             return false;
@@ -422,8 +430,8 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
         }
         return false;
     }
-      //true if conflict  false if no conflict
-     private boolean is_2_Events_Conflict(IEvent e1, IEvent e2) {
+    
+    private boolean is_2_Events_Conflict(IEvent e1, IEvent e2) {
         if (e1.getEndDateTime().compareTo(e2.getStartDateTime()) <=0) {
             return false;
         } else if (e2.getEndDateTime().compareTo(e1.getStartDateTime()) <= 0) {
@@ -432,16 +440,19 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
 
         return true;
     }
-
-//================
     @Override
     public void printEventDetailsByTitle(String title) {
-        displayEventList(scheduled_eventList.findByTitle(title));///999
+    	Elist.findByTitle(title).printList(); //now
     }
 
     @Override
     public void printEventDetailsByStudentName(String studentName) {
-     displayEventList(scheduled_eventList.findByStudentName(studentName));   ///999
+    	 LinkedList <IEvent> events = Elist.findByStudentName(studentName);
+         
+         if (!events.empty())
+             events.printList();
+         else
+             System.out.println("No events for student (" + studentName +")");   //now
 }
 
     @Override
@@ -458,14 +469,14 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
             IEvent e = list.retrieve();       
 
             if( (e instanceof Workshop)
-               &&e.getTitle().equalsIgnoreCase(title))
+               &&e.getTitle().equalsIgnoreCase(workshopTitle))
             {         
                      System.out.println("event id: "+e.getEventId());
-                     System.out.println("event type: "+e.getEventType());//done
+                     System.out.println("event type: "+e.getEventType()); //now
                      System.out.println("event title: "+e.getTitle());
                     System.out.print("Student Id(s): ");
                      LinkedList<IStudent> p= ((Workshop) e).getParticipants();
-                     printParticipants(p);///check
+                     printParticipants(p);///oo
             }              
 
             if (list.last()) 
@@ -479,11 +490,21 @@ private void printStudentSchedule(LinkedList<IEvent> list) {
     
 
     @Override
-    public void printAllEventsAlphabetically() {
-       printEventList(scheduled_eventList.getAllAlphabetically());
-      System.out.println("num of all schedulled events="+scheduled_eventList.size());
-    }
+    public void printAllEventsAlphabetically()  {
+        LinkedList <IEvent > events = Elist.getAllAlphabetically();
+        if (! events.empty())
+        {
+            events.findFirst();
+            while ( ! events.last() )
+            {
+                System.out.println(events.retrieve().getTitle() + " (" + events.retrieve().getEventId() + ") ");
+                events.findNext();
+            }
+            System.out.println(events.retrieve().getTitle() + " (" + events.retrieve().getEventId() + ") ");
+        }
+    
     }//-----end sarah
 
     
 }
+
