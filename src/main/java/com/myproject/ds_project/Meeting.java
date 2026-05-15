@@ -55,8 +55,7 @@ public class Meeting extends Event implements IMeeting{
             return false;
         return student.getStudentId() == studentId;
     }  
-        ///
-            @Override
+
     public String getEventType() {
         return "Meeting";
     }
