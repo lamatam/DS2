@@ -61,7 +61,7 @@ public abstract class Event implements IEvent {
     public String toString() {
         String str;
         str = "Event title :" + title + "\n Event ID: " + eventId + "\n Start date and time: "
-                + startDateTime + "\n End date and time: " + endDateTime + "\n Location: " + location;
+                + startDateTime.format() + "\n End date and time: " + endDateTime.format() + "\n Location: " + location;
         return str;
     }
 

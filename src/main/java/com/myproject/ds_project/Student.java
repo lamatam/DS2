@@ -28,7 +28,7 @@ public class Student implements IStudent {
         STUDENTID = student.getStudentId();
         studentName = student.getName();
         email = student.getEmail();
-        major = student.getEmail();
+        major = student.getMajor();
         yearLevel = student.getYearLevel();
         notes = student.getNotes();
         sEvents = new LinkedList<IEvent>();//new empty linkedlist

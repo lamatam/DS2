@@ -103,6 +103,7 @@ int choice2;
                     {
                         System.out.print("Enter the student's ID: ");
                         int sID = input.nextInt();
+                        input.nextLine();
                         IStudent student =advisingSystem.searchStudentById(sID);
                         if (student != null)
                                 System.out.println( student );
@@ -128,6 +129,7 @@ int choice2;
               case 3 : {
                 System.out.print("Enter the student's ID: ");
                   int sID = input.nextInt();
+                  input.nextLine();
                   if (advisingSystem.searchStudentById(sID) != null)
                   {
                       boolean deleted = advisingSystem.deleteStudent(sID);
@@ -152,7 +154,7 @@ int choice2;
 
             case 4: //Schedual new workshop or new mwwtwing
              {
-                System.out.print("Enter search criteria: ");
+                System.out.println("Enter search criteria: ");
                 System.out.println("1. Workshop " );
                 System.out.println("2. Meeting");
                 System.out.print("\n Enter your choice: ");
@@ -209,7 +211,7 @@ int choice2;
                         
                     System.out.print("Enter student name: ");
                     String sname = input.nextLine();
-                    sname = input.nextLine();
+                    
                      
                     int sID = 0;
                     LinkedList <IStudent> stds = advisingSystem.searchStudentByName(sname);
@@ -245,7 +247,7 @@ int choice2;
                 break;
             case 5: // print event details
             {
-                System.out.print("Enter search criteria: ");
+                System.out.println("Enter search criteria: ");
                 System.out.println("1. Student name " );
                 System.out.println("2. Workshop/Meeting title");
                 System.out.println("\n Enter your choice: ");
@@ -278,8 +280,7 @@ int choice2;
             {
                 System.out.print("Enter student partial name:");
                 String name=input.nextLine();
-                name=input.nextLine();
-                System.out.println("");
+                System.out.println();
                 advisingSystem.printStudentsByPartialName(name);
                 }
             break;
@@ -288,9 +289,8 @@ int choice2;
              break;
             case 8:
             {
-            System.out.print("Enter the workshop/meeting tite");
+            System.out.print("Enter the workshop/meeting tite: ");
             String WorkshopTitle=input.nextLine();
-            WorkshopTitle=input.nextLine();
             advisingSystem.printWorkshopStudents(WorkshopTitle);
             }
             break;
