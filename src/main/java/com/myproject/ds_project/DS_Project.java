@@ -14,8 +14,8 @@ public static Scanner input = new Scanner (System.in);
  public static AdvisingSystem advisingSystem = new AdvisingSystem();
     
     public static void main(String[] args) {
-       advisingSystem.loadStudentsFromCSV("students_100.csv");
-       advisingSystem.loadEventsFromCSV("events_40.csv");
+      advisingSystem.loadStudentsFromCSV("students_100.csv");
+      advisingSystem.loadEventsFromCSV("events_40.csv");
         
         
 int choice;
