@@ -60,9 +60,9 @@ public class LinkedList<T> implements List<T> {
             }
             size ++;
     }
-        ////////////++++++++++++++++++++++++++++
-            // add before first node 
-    public void insertAtBegin (T val) {
+        
+            
+    public void insertAtBegin (T val) { // add before first node 
             Node<T> tmp;
             if (empty()) {
                     current = head = new Node<T> (val);
@@ -75,8 +75,8 @@ public class LinkedList<T> implements List<T> {
             size ++;
     }
 
-    // before current 
-    public void insertBefore (T val) {
+     
+    public void insertBefore (T val) {// before current
             Node<T> tmp;
             if (empty()) {
                     current = head = new Node<T> (val);
@@ -93,7 +93,7 @@ public class LinkedList<T> implements List<T> {
                     current = tmp;
             }
             size ++;
-    }  ////////////////////////++++++++++++++++++++++++++++++
+    }  
 	
     public void remove () {
         if (empty() || current == null)
@@ -118,7 +118,8 @@ public class LinkedList<T> implements List<T> {
     {
             return size;
     }
-    public void printList(){
+    
+    public void printList(){// print all the list
          if (head != null)
         {
             Node<T> tmp = head;
