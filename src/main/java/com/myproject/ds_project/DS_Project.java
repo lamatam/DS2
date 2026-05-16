@@ -14,14 +14,14 @@ public static Scanner input = new Scanner (System.in);
  public static AdvisingSystem advisingSystem = new AdvisingSystem();
     
     public static void main(String[] args) {
-        advisingSystem.loadStudentsFromCSV("students_100.csv");
-        advisingSystem.loadEventsFromCSV("events_40.csv");
+       advisingSystem.loadStudentsFromCSV("students_100.csv");
+       advisingSystem.loadEventsFromCSV("events_40.csv");
         
         
 int choice;
 int choice2;
 
-   System.out.println("\nWelcome to the Student Advising System!");
+   System.out.println("\n --------Welcome to the Student Advising System!--------");
 
         //menu
         while (true) {
@@ -74,7 +74,7 @@ int choice2;
                     std.setNotes(notes);
 
                     if (advisingSystem.addStudent(std)) {
-                        System.out.println("Student added successfully!");
+                        System.out.println("\nStudent added successfully!");
                     } else {
                         System.out.println("Failed to add student!");
                     }

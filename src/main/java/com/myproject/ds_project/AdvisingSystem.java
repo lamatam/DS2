@@ -15,9 +15,8 @@ public class AdvisingSystem implements IAdvisingSystem {
 
     public StudentList slist = new StudentList();
     public EventList Elist = new EventList();
-    //counter for events?? has no ID
-    //public static int eventIDcounter=41;
-    public static int eventIDcounter = 41;
+
+    public static int eventIDcounter = 41; //start from 41 becouse csv file has alredy 40
     private IEventList scheduled_eventList;
     private IEventList pure_eventList;//oo
     private LinkedList<IEvent> pure_workShoptList;//oo

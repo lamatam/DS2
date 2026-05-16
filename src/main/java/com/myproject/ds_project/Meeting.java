@@ -13,6 +13,7 @@ public class Meeting extends Event implements IMeeting{
     
     public Meeting(int eID, IDateTime sDT , IDateTime eDT ){
             eventId = eID;
+            title="Meeting";
             startDateTime = new DateTime(sDT);
             endDateTime = new DateTime(eDT);
         }
