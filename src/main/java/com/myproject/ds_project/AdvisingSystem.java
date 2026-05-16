@@ -291,25 +291,11 @@ public class AdvisingSystem implements IAdvisingSystem {
     }
 
     public LinkedList<IStudent> searchStudentByName(String name) {
-        //////////
+        
     return slist.findByName(name);
     }
 
-    /////oooo
-/*
-public IStudent searchStudentByName(String name) {
 
-    LinkedList<IStudent> list = slist.findByName(name);
-
-    if (list.empty()) {
-        return null;
-    }
-
-    list.findFirst();
-
-    return list.retrieve(); 
-}////oooo 
-*/
 
     
 // Print IDs of workshop participants.

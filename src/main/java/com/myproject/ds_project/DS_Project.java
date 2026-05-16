@@ -17,6 +17,7 @@ public static Scanner input = new Scanner (System.in);
         advisingSystem.loadStudentsFromCSV("students_100.csv");
         advisingSystem.loadEventsFromCSV("events_40.csv");
         
+        
 int choice;
 int choice2;
 
@@ -27,7 +28,7 @@ int choice2;
 
     System.out.println("\nPlease choose an option:");
 
-    //System.out.println("0. Load data from files");
+    
     System.out.println("1. Add a student");
     System.out.println("2. Search for a student");
     System.out.println("3. Delete a student");
@@ -83,11 +84,11 @@ int choice2;
 
 
             case 2: // search for student
-            System.out.print("Enter search criteria: ");
+            System.out.println("Enter search criteria: ");
                 System.out.println("1. Name " ); // by name
                 System.out.println("2. Student ID"); // by id
                 System.out.println("3. Email"); // by id
-                System.out.println("\n Enter your choice: ");
+                System.out.print("\n Enter your choice: ");
                 choice2 = input.nextInt();
                 input.nextLine();
                 
