@@ -164,7 +164,7 @@ int choice2;
                 case 1: //new workshop
                 {System.out.print("Enter workshop title: ");
                 String title = input.nextLine();
-                //title = input.nextLine();
+                
                 
                 System.out.print("Enter student names separated by a comma: ");
                 String [] studentnames = input.nextLine().split(",");
@@ -206,7 +206,6 @@ int choice2;
                 {
                     System.out.print("Enter meeting title: ");
                     String title = input.nextLine();
-                    title = input.nextLine();
                         
                     System.out.print("Enter student name: ");
                     String sname = input.nextLine();

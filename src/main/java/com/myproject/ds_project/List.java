@@ -9,8 +9,8 @@ public interface List<T> {
 	public T retrieve ();
 	public void update (T val);
 	public void insert (T val);
-        public void insertAtBegin (T val);//**
-        public void insertBefore (T val);//**
+        public void insertAtBegin (T val);
+        public void insertBefore (T val);
 	public void remove ();
-        public int getSize();//**
+        public int getSize();
 	}

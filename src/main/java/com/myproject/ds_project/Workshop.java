@@ -57,7 +57,7 @@ public class Workshop extends Event implements IWorkshop {
 
     @Override
     public LinkedList<IStudent> getParticipants() {
-        return (LinkedList<IStudent>) students;//casting 
+        return students.getAll();
     }
 
     @Override
@@ -93,6 +93,9 @@ public class Workshop extends Event implements IWorkshop {
         for (int i = 0; i < tmp.size; i++) {
             if (tmp.retrieve() != null && ((Student) (tmp.retrieve())).getStudentId() == studentId) {
                 return true;
+            }
+            if (!tmp.last()) {
+                tmp.findNext();
             }
         }
         return false;

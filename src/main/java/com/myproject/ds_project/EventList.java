@@ -66,33 +66,56 @@ public class EventList implements IEventList {
             if (title.compareTo(events.retrieve().getTitle()) == 0) {
                 matchingEvents.insert(events.retrieve());
             }
+            if (!events.last()) {
+                events.findNext();//to move current (prevent meaningless loop)
+            }
         }
-        events.findNext();//to move current (prevent meaningless loop)
         return matchingEvents;
     }
 
     @Override
     public LinkedList<IEvent> findByStudentName(String studentFullName) {
-        events.findFirst();// move current to start
+
         LinkedList<IEvent> matchingEvents = new LinkedList<IEvent>();
-        LinkedList<IStudent> studentse = null;
+
+        if (events.empty()) {
+            return matchingEvents;
+        }
+
+        events.findFirst();
+
         for (int i = 0; i < events.size; i++) {
-            if (events.retrieve() instanceof Workshop workshop) {
-                studentse = (workshop.getParticipants());
-            }
-            if (events.retrieve() instanceof Meeting meeting) {
+
+            IEvent currentEvent = events.retrieve();
+            LinkedList<IStudent> studentse = new LinkedList<IStudent>();
+
+            if (currentEvent instanceof Workshop workshop) {
+                studentse = workshop.getParticipants();
+            } else if (currentEvent instanceof Meeting meeting) {
                 studentse.insert(meeting.getStudent());
             }
-            for (int j = 0; j < studentse.size; j++) {
-                if (studentse.retrieve().getName().equals(studentFullName)) {
-                    matchingEvents.insert(events.retrieve());
-                    events.findNext();
-                    break;
+
+            if (!studentse.empty()) {
+                studentse.findFirst();
+
+                for (int j = 0; j < studentse.size; j++) {
+
+                    if (studentse.retrieve().getName().equalsIgnoreCase(studentFullName)) {
+                        matchingEvents.insert(currentEvent);
+                        break;
+                    }
+
+                    if (!studentse.last()) {
+                        studentse.findNext();
+                    }
                 }
-                studentse.findNext();
             }
-            events.findNext();
+
+            if (!events.last()) {
+                events.findNext();
+            }
         }
+
         return matchingEvents;
     }
 

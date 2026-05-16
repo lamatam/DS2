@@ -9,183 +9,184 @@ package com.myproject.ds_project;
  * @author loolo
  */
 public class StudentList implements IStudentList {
-    public LinkedList <IStudent> students = new LinkedList <IStudent> ();
+
+    public LinkedList<IStudent> students = new LinkedList<IStudent>();
 
     @Override
-    public boolean add(IStudent student)
-    {
-    if ( students.empty()) //if empty 
+    public boolean add(IStudent student) {
+        if (students.empty()) //if empty 
         {
-            students.insert(new Student (student)); //add and send object 
+            students.insert(new Student(student)); //add and send object 
             return true; //success
         }//end if 
-    
-    students.findFirst(); //otherwise
-    if (student.compareTo(students.retrieve()) < 0) //comparing ID
-    {
-        students.insertAtBegin(student);
-            return true; //success
-    }//end if
-    
-    while ( ! students.last() && (student.compareTo(students.retrieve()) >= 0))
-            students.findNext();
 
-    if (student.getStudentId() == students.retrieve().getStudentId())
-       return false; //becouse it exist
-    int comp = student.compareTo(students.retrieve()); //comparing ID 0 if it equal, -1 if left small than right, 1 otherwise
-    if (comp > 0 ) 
-       students.insert(student); //insert after current
-     else 
-       students.insertBefore(student); //insert before current
-    return true;
+        students.findFirst(); //otherwise
+        if (student.compareTo(students.retrieve()) < 0) //comparing ID
+        {
+            students.insertAtBegin(student);
+            return true; //success
+        }//end if
+
+        while (!students.last() && (student.compareTo(students.retrieve()) >= 0)) {
+            students.findNext();
+        }
+
+        if (student.getStudentId() == students.retrieve().getStudentId()) {
+            return false; //becouse it exist
+        }
+        int comp = student.compareTo(students.retrieve()); //comparing ID 0 if it equal, -1 if left small than right, 1 otherwise
+        if (comp > 0) {
+            students.insert(student); //insert after current
+        } else {
+            students.insertBefore(student); //insert before current
+        }
+        return true;
     }
 
     @Override
     public IStudent findById(int studentId) { //return null if the student not found
-    IStudent student = null;
-        
-    boolean Found = false;
-    if ( ! students.empty()) {
+        IStudent student = null;
+
+        boolean Found = false;
+        if (!students.empty()) {
             students.findFirst();
-        
-        while ( ! students.last() && ! Found) {
-            if ( studentId == students.retrieve().getStudentId())
-                {
+
+            while (!students.last() && !Found) {
+                if (studentId == students.retrieve().getStudentId()) {
                     Found = true;
                     student = students.retrieve();
-                }
-                 else   
+                } else {
                     students.findNext();
+                }
             }
-            if ( ! Found && (studentId == students.retrieve().getStudentId())) //comparing last id
+            if (!Found && (studentId == students.retrieve().getStudentId())) //comparing last id
             {
                 Found = true;
                 student = students.retrieve();
             }
         }
-        return student;    }
+        return student;
+    }
 
     @Override
     public LinkedList<IStudent> findByName(String fullName) {
-    LinkedList<IStudent> data = new LinkedList<IStudent>();
-       if ( ! students.empty())
-        {
+        LinkedList<IStudent> data = new LinkedList<IStudent>();
+        if (!students.empty()) {
             students.findFirst();
-            while ( ! students.last())
-            {
-                if ( students.retrieve().getName().equalsIgnoreCase(fullName))
+            while (!students.last()) {
+                if (students.retrieve().getName().equalsIgnoreCase(fullName)) {
                     data.insert(new Student(students.retrieve()));
+                }
                 students.findNext();
             }
-            if ( students.retrieve().getName().equalsIgnoreCase(fullName))
+            if (students.retrieve().getName().equalsIgnoreCase(fullName)) {
                 data.insert(new Student(students.retrieve()));
+            }
         }
-        
-        return data;    }
+
+        return data;
+    }
 
     @Override
     public LinkedList<IStudent> findByNameContains(String partialName) {
-    LinkedList<IStudent> data = new LinkedList<IStudent>();
+        LinkedList<IStudent> data = new LinkedList<IStudent>();
 
-        if ( ! students.empty())
-        {
+        if (!students.empty()) {
             students.findFirst();
-            while ( ! students.last())
-            {   if ( students.retrieve().getName().contains(partialName))
+            while (!students.last()) {
+                if (students.retrieve().getName().contains(partialName)) {
                     data.insert(students.retrieve());
+                }
                 students.findNext();
             }
-            if ( students.retrieve().getName().contains(partialName))
+            if (students.retrieve().getName().contains(partialName)) {
                 data.insert(students.retrieve());
+            }
         }
-        return data;    }
+        return data;
+    }
 
     @Override
     public IStudent findByEmail(String email) { //
-    IStudent student = null;
-        
+        IStudent student = null;
+
         boolean Found = false;
-        if ( ! students.empty())
-        {
+        if (!students.empty()) {
             students.findFirst();
-            while ( ! students.last() && ! Found)
-            {
-                if ( email.compareToIgnoreCase(students.retrieve().getEmail()) == 0)
-                {
+            while (!students.last() && !Found) {
+                if (email.compareToIgnoreCase(students.retrieve().getEmail()) == 0) {
                     Found = true;
                     student = students.retrieve();
-                }
-                 else   
+                } else {
                     students.findNext();
+                }
             }
         }
-        if ( ! Found && email.compareToIgnoreCase(students.retrieve().getEmail()) == 0)
-        {
+        if (!Found && email.compareToIgnoreCase(students.retrieve().getEmail()) == 0) {
             Found = true;
             student = students.retrieve();
         }
-        
-        return student;    }
+
+        return student;
+    }
 
     @Override
     public LinkedList<IStudent> findByMajor(String major) {
-    LinkedList<IStudent> data = new LinkedList<IStudent>();
+        LinkedList<IStudent> data = new LinkedList<IStudent>();
 
-        if ( ! students.empty())
-        {
+        if (!students.empty()) {
             students.findFirst();
-            while ( ! students.last())
-            {
-                if ( students.retrieve().getMajor().compareToIgnoreCase(major) == 0)
+            while (!students.last()) {
+                if (students.retrieve().getMajor().compareToIgnoreCase(major) == 0) {
                     data.insert(students.retrieve());
+                }
                 students.findNext();
             }
-            if ( students.retrieve().getMajor().compareToIgnoreCase(major) == 0)
+            if (students.retrieve().getMajor().compareToIgnoreCase(major) == 0) {
                 data.insert(students.retrieve());
+            }
         }
-        return data;    }
+        return data;
+    }
 
     @Override
     public LinkedList<IStudent> findByYearLevel(int yearLevel) {
-    LinkedList<IStudent> data = new LinkedList<IStudent>();
+        LinkedList<IStudent> data = new LinkedList<IStudent>();
 
-        if ( ! students.empty())
-        {
+        if (!students.empty()) {
             students.findFirst();
-            while ( ! students.last())
-            {
-                if ( students.retrieve().getYearLevel() == yearLevel)
+            while (!students.last()) {
+                if (students.retrieve().getYearLevel() == yearLevel) {
                     data.insert(students.retrieve());
+                }
                 students.findNext();
             }
-            if ( students.retrieve().getYearLevel() == yearLevel)
+            if (students.retrieve().getYearLevel() == yearLevel) {
                 data.insert(students.retrieve());
+            }
         }
-        return data;    }
+        return data;
+    }
 
     @Override
     public LinkedList<IStudent> getAll() {
-    return students;  
+        return students;
     }
 
     @Override
     public boolean deleteById(int studentId) {
-    boolean Delete = false;
-        if ( ! students.empty())
-        {
+        boolean Delete = false;
+        if (!students.empty()) {
             students.findFirst();
-            while ( ! students.last() && ! Delete)
-            {
-                if ( studentId == students.retrieve().getStudentId())
-                {
+            while (!students.last() && !Delete) {
+                if (studentId == students.retrieve().getStudentId()) {
                     Delete = true;
                     students.remove();
-                }
-                 else   
+                } else {
                     students.findNext();
+                }
             }
-            if ( ! Delete && studentId == students.retrieve().getStudentId())
-            {
+            if (!Delete && studentId == students.retrieve().getStudentId()) {
                 Delete = true;
                 students.remove();
             }
@@ -197,5 +198,5 @@ public class StudentList implements IStudentList {
     public int size() {
         return students.getSize();
     }
-    
+
 }
