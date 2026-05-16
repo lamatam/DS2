@@ -492,7 +492,7 @@ private void printParticipants(LinkedList<IStudent> list) {
 
     @Override
     public void printEventDetailsByTitle(String title) {
-        LinkedList<IEvent> result = Elist.findByTitle(title);
+LinkedList<IEvent> result = pure_eventList.findByTitle(title);
 
         if (result == null || result.empty()) {
             System.out.println("No event found with this title.");
@@ -503,7 +503,7 @@ private void printParticipants(LinkedList<IStudent> list) {
 
     @Override
     public void printEventDetailsByStudentName(String studentName) {
-        LinkedList<IEvent> events = Elist.findByStudentName(studentName);
+    LinkedList<IEvent> events = pure_eventList.findByStudentName(studentName);
 
         if (!events.empty()) {
             events.printList();
@@ -547,7 +547,7 @@ private void printParticipants(LinkedList<IStudent> list) {
 
     @Override
     public void printAllEventsAlphabetically() {
-        LinkedList<IEvent> events = Elist.getAllAlphabetically();
+    LinkedList<IEvent> events = pure_eventList.getAllAlphabetically();
         if (!events.empty()) {
             events.findFirst();
             while (!events.last()) {
