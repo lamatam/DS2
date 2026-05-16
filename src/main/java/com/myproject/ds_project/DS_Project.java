@@ -96,7 +96,6 @@ int choice2;
                     case 1:
                         System.out.print("Enter the student's name: ");
                         String name = input.nextLine();
-                        //name = input.nextLine();
                         advisingSystem.printStudentsByName(name);
                         break;
                     case 2:
@@ -107,16 +106,19 @@ int choice2;
                         IStudent student =advisingSystem.searchStudentById(sID);
                         if (student != null)
                                 System.out.println( student );
+                        else
+                                System.out.println("Student not found!");
                     }
                     break;
                     case 3:
                     {
                         System.out.print("Enter the student's Email: ");
                         String email = input.nextLine();
-                        //email = input.nextLine();
                         IStudent student =advisingSystem.searchStudentByEmail(email);
                         if (student != null)
                                 System.out.println( student );
+                        else
+                                System.out.println("Student not found!");
                     }
                     break;
                     default :
@@ -140,13 +142,7 @@ int choice2;
                   }
                   else
                       System.out.println("3 could not find student ID");
-                   /* System.out.print("Enter student ID to delete: ");
-                    int id = input.nextInt();
-
-                    if (system.deleteStudent(id)) {
-                        System.out.println("Student deleted successfully!");
-                    } else {
-                        System.out.println("Student not found!"); */
+               
                     }
 
                     break;

@@ -107,27 +107,28 @@ public class StudentList implements IStudentList {
     }
 
     @Override
-    public IStudent findByEmail(String email) { //
-        IStudent student = null;
+    public IStudent findByEmail(String email) {
 
-        boolean Found = false;
-        if (!students.empty()) {
-            students.findFirst();
-            while (!students.last() && !Found) {
-                if (email.compareToIgnoreCase(students.retrieve().getEmail()) == 0) {
-                    Found = true;
-                    student = students.retrieve();
-                } else {
-                    students.findNext();
-                }
+        if (students.empty()) {
+            return null;
+        }
+
+        students.findFirst();
+
+        while (true) {
+
+            if (students.retrieve().getEmail().equalsIgnoreCase(email)) {
+                return students.retrieve();
             }
-        }
-        if (!Found && email.compareToIgnoreCase(students.retrieve().getEmail()) == 0) {
-            Found = true;
-            student = students.retrieve();
+
+            if (students.last()) {
+                break;
+            }
+
+            students.findNext();
         }
 
-        return student;
+        return null;
     }
 
     @Override

@@ -512,38 +512,49 @@ LinkedList<IEvent> result = pure_eventList.findByTitle(title);
         }
     }
 
-    @Override
-    public void printWorkshopStudents(String workshopTitle) {
+   @Override
+public void printWorkshopStudents(String workshopTitle) {
 
-        LinkedList<IEvent> list = scheduled_eventList.getAllAlphabetically();
-        if (list.empty()) {
-            System.out.println("no events exist");
-            return;
-        }
-        list.findFirst();
+    LinkedList<IEvent> list = pure_eventList.getAllAlphabetically();
 
-        while (true) {
-            IEvent e = list.retrieve();
-
-            if ((e instanceof Workshop)
-                    && e.getTitle().equalsIgnoreCase(workshopTitle)) {
-                System.out.println("event id: " + e.getEventId());
-                System.out.println("event type: " + e.getEventType()); //now
-                System.out.println("event title: " + e.getTitle());
-                System.out.print("Student Id(s): ");
-                LinkedList<IStudent> p = ((Workshop) e).getParticipants();
-                printParticipants(p);
-            
-            ///oo
-            }              
-
-            if (list.last()) {
-                break;
-            }
-
-            list.findNext();
-        }
+    if (list.empty()) {
+        System.out.println("No events exist.");
+        return;
     }
+
+    boolean found = false;
+
+    list.findFirst();
+
+    while (true) {
+
+        IEvent e = list.retrieve();
+
+        if ((e instanceof Workshop)
+                && e.getTitle().equalsIgnoreCase(workshopTitle)) {
+
+            found = true;
+
+            System.out.println("Event ID: " + e.getEventId());
+            System.out.println("Event type: " + e.getEventType());
+            System.out.println("Event title: " + e.getTitle());
+            System.out.print("Student ID(s): ");
+
+            LinkedList<IStudent> p = ((Workshop) e).getParticipants();
+            printParticipants(p);
+        }
+
+        if (list.last()) {
+            break;
+        }
+
+        list.findNext();
+    }
+
+    if (!found) {
+        System.out.println("No workshop found with this title.");
+    }
+}
 
     @Override
     public void printAllEventsAlphabetically() {
